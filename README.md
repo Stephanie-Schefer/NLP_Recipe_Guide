@@ -2,6 +2,12 @@
 
 # Mary Deignan and Stephanie Schefer
 
+#### Project Overview
+- To accomplish for NLP Final Project
+    - **Recipe Recommendation System:** Develop an NLP-based recommendation system that suggests recipes to users based on their dietary preferences, ingredients on hand, previous cooking history, or user reviews.
+- If time allows/ next iterations
+    - **Cooking Instructions Simplification:** Develop an NLP algorithm to simplify complex cooking instructions in recipes, making them easier to understand and follow.
+
 #### We are researching ingredient interactions and sustainable practices relating to food diets because it can be challenging and time consuming to research new recipes in order to enhance the recipe ideation process while reducing ingredient wastage and mirroring market preference trends.
 
 #### Topics to Investigate
