@@ -13,7 +13,7 @@
     -Exploring advancements in food technology and techniques can aid in developing innovative methods for ingredient utilization, preservation, and enhancement of nutritional value.
 - sustainability practices
     - Investigating sustainable sourcing methods, reducing food waste, and utilizing environmentally friendly ingredients align with contemporary consumer values and global sustainability goals.
-- marekt trends and analysis
+- market trends and analysis
     - Researching market trends, emerging ingredients, and culinary innovations can provide insights into evolving consumer demands and competitive landscape, aiding in creating market-relevant recipes.
 - culinary techniques and cooking methods
     - Studying different cooking methods and culinary techniques can optimize ingredient use and enhance flavor profiles in recipes.
