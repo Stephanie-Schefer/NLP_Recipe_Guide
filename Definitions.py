@@ -86,6 +86,8 @@ def analyze_recipe(title, ingredients, directions):
     # making stop words
     stop_words = set(stopwords.words('english'))
     punctuation = set(string.punctuation)
+    # initialize WordNetLemmatizer()
+    lemmatizer = WordNetLemmatizer()
     
     ######### TITLE #################
     # tokenize title into words
@@ -121,20 +123,54 @@ def analyze_recipe(title, ingredients, directions):
     # tokenize merged directions into words
     words_in_directions = word_tokenize(merged_directions)    
     
-    # remove stop words
+    # remove stop words, punctuation, and lower case words
     filtered_words_directions = [
-        word for word in words_in_directions 
+        word.lower() for word in words_in_directions 
         if word.lower() not in stop_words and word not in punctuation and not word.lower().startswith("'")
     ]
  
+    # leematize words
+    lemmatized_words = [lemmatizer.lemmatize(word) for word in filtered_words_directions]
+
+    # normalize degrees F/C and # minutes
+    normalized_directions = []
+    for word in lemmatized_words:
+        if re.match(r'^\d+$', word):  # If the word is a number
+            next_word_index = lemmatized_words.index(word) + 1
+            if next_word_index < len(lemmatized_words):
+                next_word = lemmatized_words[next_word_index]
+                if next_word.lower() in ['degrees', 'degree']:  # Temperature representation
+                    normalized_directions.append(word + next_word.lower())
+                    lemmatized_words[next_word_index] = ''  # Set next word as empty string to avoid duplication
+                elif next_word.lower() == 'minutes':  # Minutes representation
+                    normalized_directions.append(word + 'minutes')
+                    lemmatized_words[next_word_index] = ''  # Set next word as empty string to avoid duplication
+        elif word.lower() == 'degree':  # Handle singular 'degree' separately
+            next_word_index = lemmatized_words.index(word) + 1
+            if next_word_index < len(lemmatized_words):
+                next_word = lemmatized_words[next_word_index]
+                if next_word.lower() in ['fahrenheit', 'celsius','c','f']:
+                    normalized_directions.append('degree' + next_word.lower())
+                    lemmatized_words[next_word_index] = ''  # Set next word as empty string to avoid duplication
+        elif word.lower() not in ['fahrenheit', 'celsius','c','f']:
+            normalized_directions.append(word)
+
+    # remove empty strings from the normalized directions
+    normalized_directions = list(filter(None, normalized_directions))
+
+    # Reconstruct the normalized directions into a single string
+    normalized_directions_string = ' '.join(normalized_directions)
+    
+    # Create bigrams from the normalized lemmatized words
+    bigrams_directions = [
+        tuple(lemmatizer.lemmatize(word) for word in bigram)
+        for bigram in ngrams(normalized_directions, 2)]
+
     # Number of words in directions
-    num_words_directions = len(filtered_words_directions)
-
-    # Create bigrams from the words in directions
-    bigrams_directions = list(ngrams(filtered_words_directions, 2))
-
+    num_words_directions = len(words_in_directions)
+    
     # POS tagging for parts of speech analysis
-    pos_tags = pos_tag(filtered_words_directions)
+    pos_tags = pos_tag(words_in_directions)
 
     # Count the occurrences of each part of speech
     pos_counts = Counter(tag for word, tag in pos_tags)
@@ -245,3 +281,17 @@ def convert_to_minutes(time_string):
             minutes = int(time_units[idx - 1])
     total_minutes = (days * 24 * 60) + (hours * 60) + minutes
     return total_minutes
+
+def clean_ingredient(ingredient):
+    # This function removes numbers and extra spaces from the ingredient
+    return ' '.join([part for part in ingredient.split() if not part.isdigit()])
+
+def find_recipes_with_ingredients(ingredients_to_search, dataframe):
+    # Clean the ingredients in the dataframe
+    no_null_df['cleaned_ingredients'] = no_null_df['ingredients'].apply(lambda x: [clean_ingredient(ingredient) for ingredient in x])
+
+    matching_recipes = no_null_df[no_null_df['cleaned_ingredients'].apply(
+        lambda x: all(ingredient.lower() in ' '.join(x).lower() for ingredient in ingredients_to_search)
+    )]
+
+    return matching_recipes

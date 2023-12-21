@@ -1,0 +1,12 @@
+transformers
+nltk
+scikit-learn
+wordcloud
+torch
+jupyterlab
+matplotlib
+numpy
+pandas
+importlib
+textblob
+seaborn
