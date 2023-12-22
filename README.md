@@ -2,15 +2,29 @@
 
 # Mary Deignan and Stephanie Schefer
 
-#### Project Overview
+## Project Overview
 - To accomplish for NLP Final Project
-    - **Recipe Recommendation System:** Develop an NLP-based recommendation system that suggests recipes to users based on their dietary preferences, ingredients on hand, previous cooking history, or user reviews.
-- If time allows/ next iterations
-    - **Cooking Instructions Simplification:** Develop an NLP algorithm to simplify complex cooking instructions in recipes, making them easier to understand and follow.
+    - **Recipe Recommendation System:** Develop an NLP-based recommendation system that suggests recipes to users based on the ingredients on hand that maximize review score and minimize cooking time.
+    - **Recipe Segmentation:** 
+Recipe segmentation is a technique employed in culinary data analysis to categorize or group similar recipes together based on their inherent characteristics or ingredient compositions. This method utilizes cosine similarity scores, a mathematical measure, to assess the resemblance or proximity between different recipes within a dataset.
 
+    - **Recipe Category Classification:** Recipe Category Classification is a machine learning application that involves the categorization or labeling of recipes into specific culinary categories or types. This task utilizes multiple supervised learning techniques, a subset of machine learning methods that learn patterns from labeled data to make predictions or classifications on new, unseen data.
+
+In this context, supervised learning algorithms are trained on a dataset of recipes where each recipe is associated with a predefined category or type (e.g., appetizers, desserts, soups, Italian cuisine, etc.). These algorithms learn the relationship between various features of the recipes (such as ingredients, cooking methods, preparation steps, etc.) and their corresponding categories.
+
+Various supervised learning techniques like Decision Trees, Random Forests, Support Vector Machines (SVM), Naive Bayes, Logistic Regression, or Neural Networks can be employed for this classification task. These algorithms learn from the labeled dataset, identifying patterns and correlations between recipe features and their assigned categories to create a model.
+
+## File Overview
+1. **EDA.ipynb**:
+2. **Classification.ipynb**:
+3. **UnsupervisedLearning.ipynb**:
+4. **RecipeSegmentation.ipynb**:
+5. **RecipeGeneration.ipynb**:
+
+## Future Iterations/Research Ideas
 #### We are researching ingredient interactions and sustainable practices relating to food diets because it can be challenging and time-consuming to research new recipes in order to enhance the recipe ideation process while reducing ingredient wastage and mirroring market preference trends.
 
-#### Topics to Investigate
+#### Future Topics to Investigation For Further Research
 - consumer preferences
     - Understanding consumer tastes, dietary preferences, cultural influences, and regional variations can help tailor recipes that resonate with the target audience.
 - ingredient interactions

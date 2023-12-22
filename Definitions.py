@@ -79,7 +79,22 @@ def save_file(df, name):
         print(f"File '{file_name}' saved to '{save_folder}'")
     except Exception as e:
         print(f"Error saving file:{e}")
+"""
+- Input:
+    - title: Recipe title.
+    - ingredients: List of ingredients.
+    - directions: List of cooking directions.
+- Functionality:
+    - Tokenizes the title and removes stop words and punctuation.
+    - Performs sentiment analysis on the filtered title.
+    - Creates bigrams from the words in the title.
+    - Calculates the number of ingredients, words in directions, and their bigrams.
+    - Performs Part-of-Speech (POS) tagging for parts of speech analysis in directions.
+    - Counts occurrences of each part of speech and approximates the number of steps (verbs).
+- Output:
+    - Returns various analyzed aspects of the recipe: number of words in the title, title bigrams, sentiment polarity, subjectivity, number of ingredients, number of words in directions, directions' bigrams, POS tag counts, and estimated number of steps.
 
+"""
         
         
 def analyze_recipe(title, ingredients, directions):
@@ -180,7 +195,17 @@ def analyze_recipe(title, ingredients, directions):
     
     return num_words_title, bigrams_title, polarity, subjectivity,  num_ingredients, num_words_directions, bigrams_directions, pos_counts, num_steps
 
-
+"""
+- Input:
+    - df: DataFrame containing recipe data.
+- Functionality:
+    - Iterates through the DataFrame rows, extracting relevant information from columns like 'title', 'ner', and 'directions'.
+    - Calls analyze_recipe for each row and collects the analyzed features.
+    - Appends these features as new columns to the DataFrame.
+- Output:
+    - Returns the DataFrame with added columns of analyzed recipe features.
+    
+"""
 def add_features(df):
     # Example recipe data
     num_words_title = []
@@ -223,7 +248,15 @@ def add_features(df):
     df['num_steps'] = num_steps
     return df
 
-
+"""
+- Input:
+    - row: A row of recipe data.
+- Functionality:
+    - Dynamically extracts information such as preparation time, cooking time, total time, servings, and nutrition data from the input row.
+    - Handles exceptions and returns a Pandas Series containing extracted information.
+- Output:
+    - Returns a Pandas Series with extracted recipe information.
+"""
 def extract_info(row):
     try:
         # Extract 'prep_time', 'cook_time', 'total_time', 'servings', and 'yield' dynamically
@@ -258,7 +291,15 @@ def extract_info(row):
     except Exception as e:
         print("Error:", e)
         return pd.Series({})
-
+"""
+- Input:
+    - time_string: String representing time.
+- Functionality:
+    - Converts time strings (with units like days, hours, and minutes) into total minutes.
+    - Handles various time formats and units to calculate the total time in minutes.
+- Output:
+    - Returns the total time in minutes from the provided time string.
+"""
     
 def convert_to_minutes(time_string):
     if pd.isnull(time_string) or time_string.strip() == '':  # Handle missing values and empty strings
@@ -281,11 +322,31 @@ def convert_to_minutes(time_string):
             minutes = int(time_units[idx - 1])
     total_minutes = (days * 24 * 60) + (hours * 60) + minutes
     return total_minutes
+"""
+Cleans an ingredient string by removing numbers and extra spaces.
 
+Parameters:
+ingredient (str): The string containing the ingredient to be cleaned.
+
+Returns:
+str: The cleaned ingredient string with numbers and extra spaces removed.
+
+Example:
+>>> clean_ingredient("2 cups chopped tomatoes")
+'cups chopped tomatoes'
+"""
 def clean_ingredient(ingredient):
     # This function removes numbers and extra spaces from the ingredient
     return ' '.join([part for part in ingredient.split() if not part.isdigit()])
 
+"""
+- Finds recipes containing specified ingredients in a given DataFrame.
+- Input:
+    - ingredients_to_search (list of str): List of ingredients to search for in recipes.
+    - dataframe (pandas DataFrame): DataFrame containing recipes and their respective ingredients.
+- Returns:
+    - pandas DataFrame: DataFrame containing recipes that match the specified ingredients.
+"""
 def find_recipes_with_ingredients(ingredients_to_search, dataframe):
     # Clean the ingredients in the dataframe
     no_null_df['cleaned_ingredients'] = no_null_df['ingredients'].apply(lambda x: [clean_ingredient(ingredient) for ingredient in x])
