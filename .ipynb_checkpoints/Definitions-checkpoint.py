@@ -295,3 +295,12 @@ def find_recipes_with_ingredients(ingredients_to_search, dataframe):
     )]
 
     return matching_recipes
+
+
+# Function to perform lemmatization on text
+lemmatizer = WordNetLemmatizer()
+
+def lemmatize_text(text):
+    tokens = word_tokenize(text)
+    lemmatized_tokens = [lemmatizer.lemmatize(token) for token in tokens]
+    return ' '.join(lemmatized_tokens)
