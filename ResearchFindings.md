@@ -105,7 +105,7 @@ The recipe matching process demonstrates its effectiveness when it seamlessly al
 Future iterations of the matching process would improve functionality so that it seamlessly integrates user preferences, cooking styles, and ingredient availability, resulting in a tailored selection of recipes that inspire culinary creativity while minimizing ingredient wastage. Such a successful matching process empowers users to explore, experiment, and craft delicious meals based on their available kitchen inventory, ultimately enhancing their cooking experiences.
 
 
-## Supervised Learning
+## Machine Learning
 ### Recipe Category Classification
 Recipe Category Classification is a machine learning application that involves the categorization or labeling of recipes into specific culinary categories or types. This task utilizes multiple supervised learning techniques, a subset of machine learning methods that learn patterns from labeled data to make predictions or classifications on new, unseen data. The goal is to accurately predict categories for datasets that do not have this feature predetermined. 
 
@@ -162,6 +162,8 @@ In the context of predicting recipe ratings, the task has encountered challenges
 Unsupervised learning techniques like TF-IDF (Term Frequency-Inverse Document Frequency) vector spaces and BERT (Bidirectional Encoder Representations from Transformers) play crucial roles in analyzing recipe datasets. TF-IDF vectorization transforms recipes into numerical representations, capturing the importance of terms (ingredients, cooking methods) within the dataset. By employing cosine similarity or distance metrics, TF-IDF enables comparisons between recipes, identifying similarities based on ingredient compositions or textual descriptions. On the other hand, BERT, known for its contextualized word embeddings, provides nuanced and high-dimensional representations of words, sentences, or documents. In recipe analysis, BERT's contextual understanding allows for comprehensive comprehension of recipe texts, discerning complex cooking techniques and relationships between ingredients. Both TF-IDF and BERT techniques contribute to tasks such as recipe clustering, similarity identification, ingredient substitution recommendations, and even recipe generation. These unsupervised learning methods offer powerful tools for extracting meaningful insights, understanding semantic relationships, and enhancing the exploration and understanding of culinary datasets, ultimately aiding in various aspects of recipe dataset analysis.
 
 The clustering of recipes based on titles, directions, and ingredients shows one distinct cluster when plotted in two dimensions. The other categories are mixed together, so using BERT techniques was used to see if recipe segmentation could be any more distinct. The utilization of BERT aims to uncover deeper structures or relationships within the textual data, potentially identifying latent factors that contribute to recipe similarities or distinctions. By employing BERT embeddings, the goal is to achieve a more nuanced and refined segmentation of recipes that might not be apparent from traditional two-dimensional plots, thereby enhancing the understanding of recipe similarities and enabling a more sophisticated recipe categorization or clustering process.
+
+The process of using BERT was not as successful as we had hoped. The 2-D visualization of TF-IDF shows more distint groupings. 
 
 
 # References
